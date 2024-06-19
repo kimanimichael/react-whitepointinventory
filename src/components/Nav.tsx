@@ -45,8 +45,8 @@ const Nav: React.FC <NavProps> = props => {
                 <Link to="/farmers" className="navbar-brand">Farmers</Link>
                 <Link to="/users" className="navbar-brand">Users</Link>
                 <div>
-
-                    <Link to="/logout" className="navbar-brand">Logout</Link>
+                    <Link to="/login" className="navbar-brand">Login</Link>
+                    <Link to="/register" className="navbar-brand">SignUp</Link>
                 </div>
             </div>
         </nav>
