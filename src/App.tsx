@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 
 
 import './App.css';
@@ -7,13 +7,28 @@ import Home from "./pages/Home";
 import Nav from "./components/Nav";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
+import {renderToPipeableStream} from "react-dom/server";
 
 const App: React.FC = () => {
     const [name, setName] = useState('')
+    useEffect( () => {
+        (
+            async () => {
+                const response = await fetch('http://localhost:8080/v1/users', {
+                    method: 'GET',
+                    headers: {'Content-Type': 'application/json'},
+                    credentials: 'include'
+                })
+                const content = await response.json()
+                setName(content.Name)
+            }
+        )()
+    })
+
     return (
       <div className="App">
           <Router>
-              <Nav />
+              <Nav name={name} />
               <main className="form-signin w-100 m-auto">
                   <Routes>
                       <Route path="/" element={<Home/>}/>

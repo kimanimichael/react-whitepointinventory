@@ -2,7 +2,7 @@ import React from "react";
 import {Link} from "react-router-dom";
 
 interface NavProps {
-    // name: string
+    name: string
 }
 
 const Nav: React.FC <NavProps> = props => {
