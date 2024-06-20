@@ -7,7 +7,6 @@ import Home from "./pages/Home";
 import Nav from "./components/Nav";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
-import {renderToPipeableStream} from "react-dom/server";
 
 const App: React.FC = () => {
     const [name, setName] = useState('')
