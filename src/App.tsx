@@ -28,10 +28,10 @@ const App: React.FC = () => {
     return (
       <div className="App">
           <Router>
-              <Nav name={name} />
+              <Nav name={name} setName={setName} />
               <main className="form-signin w-100 m-auto">
                   <Routes>
-                      <Route path="/" element={<Home/>}/>
+                      <Route path="/" element={<Home name={name}/>}/>
                       <Route path="/register" element={<Register/>}/>
                       <Route path="/login" element={<Login setName={setName}/>}/>
                   </Routes>
