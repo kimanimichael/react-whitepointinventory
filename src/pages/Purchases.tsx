@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 import '../styles/Purchases.css'
+import '../App.css'
 
 interface Purchase {
     chicken: number;
@@ -42,35 +43,39 @@ const Purchases: React.FC = () => {
         )
     }
     return (
-    <div className="Purchase">
-        <h1>PURCHASES</h1>
-        <table>
-            <thead>
-            <tr>
-                <th>Created At</th>
-                <th>ID</th>
-                <th>Updated At</th>
-                <th>Chicken</th>
-                <th>Price Per Chicken</th>
-                <th>User </th>
-                <th>Farmer </th>
-            </tr>
-            </thead>
-            <tbody>
-            {data.map((item) => (
-                <tr key={item.id}>
-                    <td>{item.created_at}</td>
-                    <td>{item.id}</td>
-                    <td>{item.updated_at}</td>
-                    <td>{item.chicken}</td>
-                    <td>{item.price_per_chicken}</td>
-                    <td>{item.user_name}</td>
-                    <td>{item.farmer_name}</td>
+        <div className="Purchase">
+            <h1>PURCHASES</h1>
+            <table>
+                <thead>
+                <tr>
+                    <th>Created At</th>
+                    <th>User</th>
+                    <th>Farmer</th>
+                    <th>Payload</th>
                 </tr>
-            ))}
-            </tbody>
-        </table>
-    </div>
+                </thead>
+                <tbody>
+                {data.map((item) => (
+                    <tr key={item.id}>
+                        <td>{item.created_at}</td>
+                        <td>{item.user_name}</td>
+                        <td>{item.farmer_name}</td>
+                        <td>
+                                <pre>{JSON.stringify({
+                                    chicken_no: item.chicken,
+                                    chicken_price: item.price_per_chicken,
+                                    purchase: item.id,
+                                    created_at: item.created_at,
+                                    updated_at: item.updated_at,
+                                    user_id: item.user_id,
+                                    farmer_id: item.farmer_id
+                                }, null, 2)}</pre>
+                        </td>
+                    </tr>
+                ))}
+                </tbody>
+            </table>
+        </div>
 
     )
 }
