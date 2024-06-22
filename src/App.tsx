@@ -7,6 +7,7 @@ import Home from "./pages/Home";
 import Nav from "./components/Nav";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
+import Purchases from "./pages/Purchases";
 
 const App: React.FC = () => {
     const [name, setName] = useState('')
@@ -33,8 +34,14 @@ const App: React.FC = () => {
                       <Route path="/" element={<Home name={name}/>}/>
                       <Route path="/register" element={<Register/>}/>
                       <Route path="/login" element={<Login setName={setName}/>}/>
+
                   </Routes>
               </main>
+              <div className="Purchase">
+                  <Routes>
+                      <Route path="/purchases" element={<Purchases/>}/>
+                  </Routes>
+              </div>
           </Router>
 
       </div>

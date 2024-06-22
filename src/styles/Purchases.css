@@ -1,0 +1,30 @@
+.Purchase {
+    width: 100%;
+    font-family: Arial, sans-serif;
+    /*margin: 10px;*/
+    text-align: center;
+}
+.Purchase h1 {
+    text-align: left;
+    margin-bottom: 20px;
+    margin-left: 90px;
+    margin-top: -40px;
+}
+
+.Purchase table {
+    width: 60%;
+    border-collapse: collapse;
+    margin-left: 90px;
+    margin-right: 10px;
+}
+
+.Purchase th, .Purchase td {
+    border-bottom: 1px solid rgba(38, 215, 191, 0.39);
+    text-align: left;
+    padding: 8px;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
