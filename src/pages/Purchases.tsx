@@ -95,10 +95,10 @@ const Purchases: React.FC <PurchaseProps> = props => {
             <div className="form-container">
                 <form onSubmit={submit}>
                     <input type="number" className="" placeholder="Chicken"
-                        onChange={e => setChickenNumber(Number(e.target.value))}
+                           onChange={e => setChickenNumber(Number(e.target.value))}
                     />
                     <input type="number" className="" placeholder="Chicken Price"
-                        onChange={e => setChickenPrice(Number(e.target.value))}
+                           onChange={e => setChickenPrice(Number(e.target.value))}
                     />
                     <input className="" placeholder="Farmer Name"
                            onChange={handleInputChange}
