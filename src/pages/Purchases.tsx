@@ -22,8 +22,8 @@ const Purchases: React.FC <PurchaseProps> = props => {
     const [data, setData] = useState<Purchase[]>([])
     const [loading, setLoading] = useState<boolean>(true)
 
-    const[chicken_no, setChickenNumber] = useState(0)
-    const[chicken_price, setChickenPrice] = useState(0)
+    const[chicken_no, setChickenNumber] = useState('')
+    const[chicken_price, setChickenPrice] = useState('')
     const[farmer_name, setFarmerName] = useState('')
 
     const [reload, setReload] = useState(false)
@@ -59,15 +59,17 @@ const Purchases: React.FC <PurchaseProps> = props => {
                 'Authorization': `APIKey:${props.APIKey}`
             },
             body: JSON.stringify({
-                chicken_no,
-                chicken_price,
-                farmer_name
+                chicken_no: Number(chicken_no),
+                chicken_price: Number(chicken_price),
+                farmer_name: farmer_name
                 }
             )
         })
         const content = await response.json()
         if (response.status < 400) {
             console.log("Purchase creation successful. Code: ", response.status)
+            setChickenNumber('')
+            setChickenPrice('')
             setFarmerName('')
             setReload(!reload)
         }
@@ -92,10 +94,12 @@ const Purchases: React.FC <PurchaseProps> = props => {
             <div className="form-container">
                 <form onSubmit={submit}>
                     <input type="number" className="" placeholder="Chicken"
-                           onChange={e => setChickenNumber(Number(e.target.value))}
+                           value={chicken_no}
+                           onChange={e => setChickenNumber((e.target.value))}
                     />
                     <input type="number" className="" placeholder="Chicken Price"
-                           onChange={e => setChickenPrice(Number(e.target.value))}
+                           value={chicken_price}
+                           onChange={e => setChickenPrice((e.target.value))}
                     />
                     <input className="" placeholder="Farmer Name"
                            value={farmer_name}
