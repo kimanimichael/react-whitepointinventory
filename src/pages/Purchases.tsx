@@ -68,6 +68,7 @@ const Purchases: React.FC <PurchaseProps> = props => {
         const content = await response.json()
         if (response.status < 400) {
             console.log("Purchase creation successful. Code: ", response.status)
+            setFarmerName('')
             setReload(!reload)
         }
         else  {
@@ -97,6 +98,7 @@ const Purchases: React.FC <PurchaseProps> = props => {
                            onChange={e => setChickenPrice(Number(e.target.value))}
                     />
                     <input className="" placeholder="Farmer Name"
+                           value={farmer_name}
                            onChange={handleInputChange}
                     />
                     <button className="createPurchaseButton" type="submit">Create New Purchase</button>
