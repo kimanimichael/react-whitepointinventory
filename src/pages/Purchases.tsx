@@ -2,6 +2,11 @@ import React, {SyntheticEvent, useEffect, useState} from "react";
 import '../styles/Purchases.css'
 import '../App.css'
 
+interface PurchaseProps {
+    email: string
+    password: string
+}
+
 interface Purchase {
     chicken: number;
     created_at: string;
@@ -14,7 +19,7 @@ interface Purchase {
     user_name: string;
 }
 
-const Purchases: React.FC = () => {
+const Purchases: React.FC <PurchaseProps> = props => {
     const [data, setData] = useState<Purchase[]>([])
     const [loading, setLoading] = useState<boolean>(true)
 
@@ -28,6 +33,9 @@ const Purchases: React.FC = () => {
         const transformedName = e.target.value.replace(/\s+/g, '').toLowerCase()
         setFarmerName(transformedName)
     }
+
+    const userEmail = props.email
+    const userPassword = props.password
 
     useEffect(() =>{
         const fetchData = async () => {
@@ -52,7 +60,7 @@ const Purchases: React.FC = () => {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Password password:Email monikamau@yahoo.com'
+                'Authorization': `Password ${userPassword}:Email ${userEmail}`
             },
             body: JSON.stringify({
                 chicken_no,

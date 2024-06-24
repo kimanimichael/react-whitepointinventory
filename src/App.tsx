@@ -11,6 +11,9 @@ import Purchases from "./pages/Purchases";
 
 const App: React.FC = () => {
     const [name, setName] = useState('')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+
     useEffect( () => {
         (
             async () => {
@@ -21,6 +24,8 @@ const App: React.FC = () => {
                 })
                 const content = await response.json()
                 setName(content.Name)
+                setEmail(content.Email)
+                setPassword(content.Password)
             }
         )()
     })
@@ -39,7 +44,7 @@ const App: React.FC = () => {
               </main>
               <div className="Purchase">
                   <Routes>
-                      <Route path="/purchases" element={<Purchases/>}/>
+                      <Route path="/purchases" element={<Purchases email={email} password={password} />}/>
                   </Routes>
               </div>
           </Router>
