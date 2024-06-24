@@ -3,8 +3,7 @@ import '../styles/Purchases.css'
 import '../App.css'
 
 interface PurchaseProps {
-    email: string
-    password: string
+    APIKey: string
 }
 
 interface Purchase {
@@ -34,9 +33,6 @@ const Purchases: React.FC <PurchaseProps> = props => {
         setFarmerName(transformedName)
     }
 
-    const userEmail = props.email
-    const userPassword = props.password
-
     useEffect(() =>{
         const fetchData = async () => {
             const response = await fetch('http://localhost:8080/v1/purchases', {
@@ -60,7 +56,7 @@ const Purchases: React.FC <PurchaseProps> = props => {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Password ${userPassword}:Email ${userEmail}`
+                'Authorization': `APIKey:${props.APIKey}`
             },
             body: JSON.stringify({
                 chicken_no,
