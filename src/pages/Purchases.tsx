@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {SyntheticEvent, useEffect, useState} from "react";
 import '../styles/Purchases.css'
 import '../App.css'
 
@@ -18,6 +18,17 @@ const Purchases: React.FC = () => {
     const [data, setData] = useState<Purchase[]>([])
     const [loading, setLoading] = useState<boolean>(true)
 
+    const[chicken_no, setChickenNumber] = useState(0)
+    const[chicken_price, setChickenPrice] = useState(0)
+    const[farmer_name, setFarmerName] = useState('')
+
+    const [reload, setReload] = useState(false)
+
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const transformedName = e.target.value.replace(/\s+/g, '').toLowerCase()
+        setFarmerName(transformedName)
+    }
+
     useEffect(() =>{
         const fetchData = async () => {
             const response = await fetch('http://localhost:8080/v1/purchases', {
@@ -30,8 +41,36 @@ const Purchases: React.FC = () => {
             setLoading(false)
         }
         fetchData();
-    }, [])
+    }, [reload])
 
+
+
+    const submit = async (e: SyntheticEvent) => {
+        e.preventDefault()
+
+        const response = await fetch('http://localhost:8080/v1/purchases', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Password password:Email monikamau@yahoo.com'
+            },
+            body: JSON.stringify({
+                chicken_no,
+                chicken_price,
+                farmer_name
+                }
+            )
+        })
+        const content = await response.json()
+        if (response.status < 400) {
+            console.log("Purchase creation successful. Code: ", response.status)
+            setReload(!reload)
+        }
+        else  {
+            console.log("Purchase creation failed failed. Error: ", response.status)
+            alert(content.error)
+        }
+    }
 
     if (loading) {
         return (
@@ -45,6 +84,21 @@ const Purchases: React.FC = () => {
     return (
         <div className="Purchase">
             <h1>PURCHASES</h1>
+            <div className="form-container">
+                <form onSubmit={submit}>
+                    <input type="number" className="" placeholder="Chicken"
+                        onChange={e => setChickenNumber(Number(e.target.value))}
+                    />
+                    <input type="number" className="" placeholder="Chicken Price"
+                        onChange={e => setChickenPrice(Number(e.target.value))}
+                    />
+                    <input className="" placeholder="Farmer Name"
+                           onChange={handleInputChange}
+                    />
+                    <button className="createPurchaseButton" type="submit">Create New Purchase</button>
+                </form>
+            </div>
+
             <table>
                 <thead>
                 <tr>

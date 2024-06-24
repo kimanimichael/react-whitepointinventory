@@ -11,6 +11,25 @@
     margin-top: -40px;
 }
 
+.form-container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+form {
+    text-align: right;
+    margin-left: 10px;
+    margin-right: 100px;
+    display: flex;
+    flex-direction: column;
+    width: 300px; /* Adjust width as needed */
+}
+
+.createPurchaseButton {
+    background-color: aquamarine;
+    border-radius: 6% 6% 6% 6%;
+}
+
 .Purchase table {
     width: 60%;
     border-collapse: collapse;
