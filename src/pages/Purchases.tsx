@@ -105,7 +105,7 @@ const Purchases: React.FC <PurchaseProps> = props => {
                            value={farmer_name}
                            onChange={handleInputChange}
                     />
-                    <button className="createPurchaseButton" type="submit">Create New Purchase</button>
+                        <button className="createPurchaseButton" type="submit">Create New Purchase</button>
                 </form>
             </div>
 
