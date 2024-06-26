@@ -119,7 +119,7 @@ const Purchases: React.FC <PurchaseProps> = props => {
                 </tr>
                 </thead>
                 <tbody>
-                {data.map((item) => (
+                    {data.map((item) => (
                     <tr key={item.id}>
                         <td>{item.created_at}</td>
                         <td>{item.user_name}</td>
