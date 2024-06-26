@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {SyntheticEvent, useEffect, useState} from "react";
 
 interface PaymentProps {
     APIKey: string
@@ -20,7 +20,16 @@ const Payments: React.FC <PaymentProps> = props => {
     const[data, setData] = useState<Payment[]>([])
     const[loading, setLoading] = useState(true)
 
+    const[chicken_no, setChickenNumber] = useState('')
+    const[chicken_price, setChickenPrice] = useState('')
+    const[farmer_name, setFarmerName] = useState('')
+
     const [reload, setReload] = useState(false)
+
+    const handleFarmerNameInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const transformedName = e.target.value.replace(/\s+/g, '').toLowerCase()
+        setFarmerName(transformedName)
+    }
 
     useEffect(() => {
         const fetchData = async () => {
@@ -34,6 +43,36 @@ const Payments: React.FC <PaymentProps> = props => {
         }
         fetchData()
     }, [reload])
+
+    const submit = async (e: SyntheticEvent) => {
+        e.preventDefault()
+
+        const response = await fetch('http://localhost:8080/v1/payments', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `APIKey:${props.APIKey}`
+            },
+            body: JSON.stringify({
+                cash_paid: Number(chicken_no),
+                price_per_chicken_paid: Number(chicken_price),
+                farmer_name: farmer_name
+            })
+        })
+        const content = await response.json()
+        if (response.status < 400) {
+            console.log("Payment creation successful")
+            setChickenNumber('')
+            setChickenPrice('')
+            setFarmerName('')
+            setReload(!reload)
+        }
+        else {
+            console.log("Payment creation failed")
+            alert(content.error)
+        }
+    }
+
     if (loading) {
         return (
             <div>
@@ -45,6 +84,23 @@ const Payments: React.FC <PaymentProps> = props => {
     return (
         <div className="Purchase">
             <h1>PAYMENTS</h1>
+            <div className="form-container">
+                <form onSubmit={submit}>
+                    <input type="number" className="" placeholder="Cash Paid"
+                           value={chicken_no}
+                           onChange={e => setChickenNumber(e.target.value)}
+                    />
+                    <input type="number" className="" placeholder="Chicken Price"
+                           value={chicken_price}
+                           onChange={e => setChickenPrice(e.target.value)}
+                    />
+                    <input className="" placeholder="Farmer Name"
+                           value={farmer_name}
+                           onChange={handleFarmerNameInput}
+                    />
+                    <button className="createPurchaseButton" type="submit" >Create New Payment</button>
+                </form>
+            </div>
             <table>
                 <thead>
                 <tr>
