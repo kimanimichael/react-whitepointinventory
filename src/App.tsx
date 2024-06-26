@@ -8,6 +8,7 @@ import Nav from "./components/Nav";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Purchases from "./pages/Purchases";
+import Payments from "./pages/Payments";
 
 const App: React.FC = () => {
     const [name, setName] = useState('')
@@ -43,6 +44,11 @@ const App: React.FC = () => {
               <div className="Purchase">
                   <Routes>
                       <Route path="/purchases" element={<Purchases APIKey={APIKey} />}/>
+                  </Routes>
+              </div>
+              <div className="Payments">
+                  <Routes>
+                      <Route path="/payments" element={<Payments APIKey={APIKey}/>}/>
                   </Routes>
               </div>
           </Router>
