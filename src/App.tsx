@@ -33,7 +33,7 @@ const App: React.FC = () => {
     return (
       <div className="App">
           <Router>
-              <Nav name={name} setName={setName} />
+              <Nav name={name} setName={setName}/>
               <main className="form-signin w-100 m-auto">
                   <Routes>
                       <Route path="/" element={<Home name={name}/>}/>
@@ -44,7 +44,7 @@ const App: React.FC = () => {
               </main>
               <div className="Purchase">
                   <Routes>
-                      <Route path="/purchases" element={<Purchases APIKey={APIKey} />}/>
+                      <Route path="/purchases" element={<Purchases APIKey={APIKey}/>}/>
                   </Routes>
               </div>
               <div className="Payments">
