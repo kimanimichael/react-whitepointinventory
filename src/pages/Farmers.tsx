@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {SyntheticEvent, useEffect, useState} from "react";
 
 interface Farmer {
     cash_balance: number;
@@ -43,6 +43,10 @@ const Farmers: React.FC = () => {
     const[reload, setReload] = useState(true)
     const[loading, setLoading] = useState(true)
 
+    const[farmerName, setFarmerName] = useState('')
+    const[initialChickenOwed, setInitialChickenOwed] = useState('')
+    const[initialCashOwed, setInitialCashOwed] = useState('')
+
     useEffect(() => {
         const fetchData = async () => {
             const response = await fetch('http://localhost:8080/v1/farmer', {
@@ -82,6 +86,35 @@ const Farmers: React.FC = () => {
         fetchData()
     }, [reload])
 
+    const handleFarmerNameInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const transformedNameValue = e.target.value.replace(/\s+/g, '').toLowerCase()
+        setFarmerName(transformedNameValue)
+    }
+    const submit = async (e: SyntheticEvent) => {
+        e.preventDefault()
+
+        const response = await fetch('http://localhost:8080/v1/farmers', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                name: farmerName,
+                chicken_balance: Number(initialChickenOwed),
+                cash_balance: Number(initialCashOwed)
+            })
+        })
+        const content = await response.json()
+        if (response.status < 400) {
+            console.log("Farmer creation successful")
+            setFarmerName('')
+            setInitialChickenOwed('')
+            setInitialCashOwed('')
+            setReload(!reload)
+        }
+        else {
+            console.log("Farmer creation not successful")
+            alert(content.error)
+        }
+    }
     if (loading) {
         return (
             <div>
@@ -93,6 +126,24 @@ const Farmers: React.FC = () => {
     return (
         <div className="Purchase">
             <h1>FARMERS</h1>
+            <div className="form-container">
+                <form onSubmit={submit}>
+                    <input type="" className="" placeholder="Farmer Name"
+                           value={farmerName}
+                           onChange={handleFarmerNameInput}
+                    />
+                    <input type="number" className="" placeholder="Chicken Owed"
+                           value={initialChickenOwed}
+                           onChange={e => setInitialChickenOwed(e.target.value)}
+                    />
+                    <input type="number" className="" placeholder="Cash Owed"
+                           value={initialCashOwed}
+                           onChange={e => setInitialCashOwed(e.target.value)}
+                    />
+                    <button className="createPurchaseButton" type="submit">Create New Farmer</button>
+                </form>
+            </div>
+
             <table>
                 <thead>
                 <tr>
