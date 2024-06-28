@@ -11,6 +11,19 @@
     margin-top: -40px;
 }
 
+.Users {
+    width: 100%;
+    font-family: Arial, sans-serif;
+    /*margin: 10px;*/
+    text-align: center;
+}
+.Users h1 {
+    text-align: left;
+    margin-bottom: 20px;
+    margin-left: 90px;
+    margin-top: -40px;
+}
+
 .form-container {
     display: flex;
     justify-content: flex-end;
@@ -38,6 +51,19 @@ form {
 }
 
 .Purchase th, .Purchase td {
+    border-bottom: 1px solid rgba(38, 215, 191, 0.39);
+    text-align: left;
+    padding: 8px;
+}
+
+.Users table {
+    width: 80%;
+    border-collapse: collapse;
+    margin-left: 90px;
+    margin-right: 10px;
+}
+
+.Users th, .Users td {
     border-bottom: 1px solid rgba(38, 215, 191, 0.39);
     text-align: left;
     padding: 8px;

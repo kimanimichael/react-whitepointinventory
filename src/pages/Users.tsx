@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from "react";
+import "../styles/Purchases.css"
 
 interface User {
     ApiKey: string;
@@ -10,9 +11,36 @@ interface User {
     UpdatedAt: string;
 }
 
+interface Purchase {
+    chicken: number;
+    created_at: string;
+    farmer_id: string;
+    farmer_name: string;
+    id: string;
+    price_per_chicken: number;
+    updated_at: string;
+    user_id: string;
+    user_name: string;
+}
+
+interface Payment {
+    cash_paid: number;
+    created_at: string;
+    farmer_id: string;
+    farmer_name: string;
+    id: string;
+    price_per_chicken_paid: number;
+    updated_at: string;
+    user_id: string;
+    user_name: string;
+}
+
 const Users: React.FC =  () => {
     const[userData, setUserData] = useState<User[]>([])
     const[loading, setLoading] = useState(true)
+
+    const[purchaseData, setPurchaseData] = useState<Purchase[]>([])
+    const[paymentData, setPaymentData] = useState<Payment[]>([])
 
     useEffect(() => {
         const fetchData = async () => {
@@ -26,6 +54,32 @@ const Users: React.FC =  () => {
         }
         fetchData()
     },[])
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const response = await fetch('http://localhost:8080/v1/purchases', {
+                method: 'GET',
+                headers: {'Content-Type': 'application/json'}
+            })
+            const content = await response.json()
+            setPurchaseData(content)
+        }
+        fetchData()
+    }, []);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const response = await fetch('http://localhost:8080/v1/payments', {
+                method: 'GET',
+                headers: {'Content-Type': 'application/json'}
+            })
+            const content = await response.json()
+            setPaymentData(content)
+            console.log(paymentData)
+        }
+        fetchData()
+    }, []);
+
     if (loading) {
         return (
             <div>
@@ -35,33 +89,84 @@ const Users: React.FC =  () => {
         )
     }
     return (
-        <div className="Purchase">
+        <div className="Users">
             <h1>USERS</h1>
             <table>
                 <thead>
                 <tr>
-                    <th>Name </th>
-                    <th>Payload</th>
+                    <th>Name</th>
+                    <th>Purchases</th>
+                    <th>Payments</th>
+                    <th>User Info</th>
                 </tr>
                 </thead>
                 <tbody>
-                {userData.map((user) => (
-                    <tr key={user.ID}>
-                        <td>{user.Name}</td>
-                        <td>
+                {userData.map((user) => {
+                    const userPurchases = purchaseData
+                        .filter(purchaseData=>purchaseData.user_id === user.ID)
+                        .sort((a, b)=>new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
+                        .slice(0, 2);
+                    const userPayments = paymentData
+                        .filter(paymentData => paymentData.user_id === user.ID)
+                        .sort((a, b)=>new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
+                        .slice(0, 2);
+                    function stripMilliseconds(createdAt: string): string {
+                        const timeStamp = new Date(createdAt)
+                        return timeStamp.toISOString().split('.')[0]
+                    }
+                    return (
+                        <tr key={user.ID}>
+                            <td>{user.Name}</td>
+                            <td>
+                                {
+                                    userPurchases.map(purchaseData => (
+                                        <div key={purchaseData.id}>
+                                            <pre>
+                                                {
+                                                    JSON.stringify({
+                                                        chicken_no: purchaseData.chicken,
+                                                        chicken_price: purchaseData.price_per_chicken,
+                                                        created_at: stripMilliseconds(purchaseData.created_at)
+                                                    },null, 2)
+                                                }
+                                            </pre>
+                                        </div>
+                                    ))
+                                }
+                            </td>
+                            <td>
+                                {
+                                    userPayments.map(paymentData => (
+                                        <div key={paymentData.id}>
+                                            <pre>
+                                                {
+                                                    JSON.stringify({
+                                                        cash_paid: paymentData.cash_paid,
+                                                        chicken_price: paymentData.price_per_chicken_paid,
+                                                        created_at: stripMilliseconds(paymentData.created_at)
+                                                    },null, 2)
+                                                }
+                                            </pre>
+                                        </div>
+                                    ))
+                                }
+                            </td>
+                            <td>
                             <pre>
                                 {
                                     JSON.stringify({
                                         user_email: user.Email,
                                         user_name: user.Name,
                                         user_id: user.ID,
-                                        created_at: user.CreatedAt
-                                    }, null,2)
+                                        created_at: stripMilliseconds(user.CreatedAt)
+                                    }, null, 2)
                                 }
                             </pre>
-                        </td>
-                    </tr>
-                ))}
+                            </td>
+                        </tr>
+                    )
+
+                })}
                 </tbody>
             </table>
         </div>
