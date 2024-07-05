@@ -1,9 +1,9 @@
 services:
   app:
-    build:
-      context: ..
-      dockerfile: docker/Dockerfile
-    image: whitepointinventoryapp
+#    build:
+#      context: ..
+#      dockerfile: docker/Dockerfile
+    image: michaelkimani/whitepointinventoryapp:latest
     container_name: whitepointinventoryapp-container
     ports:
       - "3000:3000"
