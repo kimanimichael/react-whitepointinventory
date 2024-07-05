@@ -1,0 +1,9 @@
+services:
+  app:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: whitepointinventoryapp
+    container_name: whitepointinventoryapp-container
+    ports:
+      - "3000:3000"
