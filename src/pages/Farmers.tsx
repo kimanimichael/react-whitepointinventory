@@ -2,7 +2,7 @@ import React, {SyntheticEvent, useEffect, useState} from "react";
 
 interface Farmer {
     cash_balance: number;
-    chicken_balance: string;
+    chicken_balance: number;
     created_at: string;
     name: string;
     id: string;
