@@ -111,7 +111,7 @@ const Home: React.FC <HomeProps> = props => {
                             return (
                                 <tr key={farmer.name}>
                                     <td>{farmer.name}</td>
-                                    <td>{farmer.chicken_balance}</td>
+                                    <td>{farmer.chicken_balance.toFixed(2)}</td>
                                     <td>{farmer.cash_balance}</td>
 
                                 </tr>
@@ -192,7 +192,7 @@ const Home: React.FC <HomeProps> = props => {
                         </thead>
                         <tbody>
                         <tr >
-                            <td>{totalChickenBalance}</td>
+                            <td>{totalChickenBalance.toFixed(2)}</td>
                             <td>{totalCashBalance}</td>
                         </tr>
                         </tbody>
