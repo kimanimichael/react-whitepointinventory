@@ -16,6 +16,8 @@ interface Purchase {
     updated_at: string;
     user_id: string;
     user_name: string;
+    chicken_balance:number;
+    cash_balance:number;
 }
 
 const Purchases: React.FC <PurchaseProps> = props => {
@@ -31,6 +33,11 @@ const Purchases: React.FC <PurchaseProps> = props => {
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const transformedName = e.target.value.replace(/\s+/g, '').toLowerCase()
         setFarmerName(transformedName)
+    }
+
+    function stripMilliseconds(createdAt: string): string{
+        const timeStamp = new Date(createdAt)
+        return timeStamp.toISOString().split('.')[0]
     }
 
     useEffect(() =>{
@@ -121,7 +128,7 @@ const Purchases: React.FC <PurchaseProps> = props => {
                 <tbody>
                     {data.map((item) => (
                     <tr key={item.id}>
-                        <td>{item.created_at}</td>
+                        <td>{stripMilliseconds(item.created_at)}</td>
                         <td>{item.user_name}</td>
                         <td>{item.farmer_name}</td>
                         <td>
@@ -129,10 +136,10 @@ const Purchases: React.FC <PurchaseProps> = props => {
                                     chicken_no: item.chicken,
                                     chicken_price: item.price_per_chicken,
                                     purchase: item.id,
-                                    created_at: item.created_at,
-                                    updated_at: item.updated_at,
                                     user_id: item.user_id,
-                                    farmer_id: item.farmer_id
+                                    farmer_id: item.farmer_id,
+                                    chicken_balance: item.chicken_balance.toFixed(2),
+                                    cash_balance: item.chicken_balance,
                                 }, null, 2)}</pre>
                         </td>
                     </tr>
