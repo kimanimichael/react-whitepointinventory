@@ -2,7 +2,7 @@ import React, {SyntheticEvent, useEffect, useState} from "react";
 
 interface Farmer {
     cash_balance: number;
-    chicken_balance: string;
+    chicken_balance: number;
     created_at: string;
     name: string;
     id: string;
@@ -164,10 +164,14 @@ const Farmers: React.FC = () => {
                         .filter(paymentData => paymentData.farmer_id === farmer.id)
                         .sort((a,b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
                         .slice(0,2)
+                    function stripMilliseconds(createdAt: string): string {
+                        const timeStamp = new Date(createdAt)
+                        return timeStamp.toISOString().split('.')[0]
+                    }
                     return (
                         <tr key={farmer.name}>
                             <td>{farmer.name}</td>
-                            <td>{farmer.chicken_balance}</td>
+                            <td>{farmer.chicken_balance.toFixed(2)}</td>
                             <td>{farmer.cash_balance}</td>
                             <td>
                                 {
@@ -177,7 +181,7 @@ const Farmers: React.FC = () => {
                                                 {JSON.stringify({
                                                     Chicken: purchaseData.chicken,
                                                     Price: purchaseData.price_per_chicken,
-                                                    CreatedAt: purchaseData.created_at,
+                                                    CreatedAt: stripMilliseconds(purchaseData.created_at),
 
                                                 }, null, 2)}
                                             </pre>
@@ -196,7 +200,7 @@ const Farmers: React.FC = () => {
                                                     JSON.stringify({
                                                         CashPaid: paymentData.cash_paid,
                                                         Price: paymentData.price_per_chicken_paid,
-                                                        CreatedAt: paymentData.created_at
+                                                        CreatedAt: stripMilliseconds(paymentData.created_at)
                                                     }, null, 2)
                                                 }
                                             </pre>

@@ -14,6 +14,8 @@ interface Payment {
     updated_at: string;
     user_id: string;
     user_name: string;
+    chicken_balance:number;
+    cash_balance:number;
 }
 
 const Payments: React.FC <PaymentProps> = props => {
@@ -29,6 +31,11 @@ const Payments: React.FC <PaymentProps> = props => {
     const handleFarmerNameInput = (e: React.ChangeEvent<HTMLInputElement>) => {
         const transformedName = e.target.value.replace(/\s+/g, '').toLowerCase()
         setFarmerName(transformedName)
+    }
+
+    function stripMilliseconds(createdAt: string): string{
+        const timeStamp = new Date(createdAt)
+        return timeStamp.toISOString().split('.')[0]
     }
 
     useEffect(() => {
@@ -113,7 +120,7 @@ const Payments: React.FC <PaymentProps> = props => {
                 <tbody>
                 {data.map((item) => (
                     <tr key={item.id}>
-                        <td>{item.created_at}</td>
+                        <td>{stripMilliseconds(item.created_at)}</td>
                         <td>{item.user_name}</td>
                         <td>{item.farmer_name}</td>
                         <td>
@@ -122,10 +129,10 @@ const Payments: React.FC <PaymentProps> = props => {
                                     cash_paid:item.cash_paid,
                                     chicken_price: item.price_per_chicken_paid,
                                     payment: item.id,
-                                    created_at: item.created_at,
-                                    updated_at: item.updated_at,
                                     user_id: item.user_id,
-                                    farmer_id: item.farmer_id
+                                    farmer_id: item.farmer_id,
+                                    chicken_balance: item.chicken_balance.toFixed(2),
+                                    cash_balance: item.cash_balance
                                 }, null, 2)}
                             </pre>
                         </td>
