@@ -82,7 +82,7 @@ const Home: React.FC <HomeProps> = props => {
         )
     }
 
-    const sortedData = data.sort((a, b) => b.cash_balance - a.cash_balance).slice(0, 5);
+    const sortedData = data.sort((a, b) => b.cash_balance - a.cash_balance).slice(0, 10);
 
     const sortedTopPricePurchases = purchaseData.slice(0, 60).sort((a, b) => b.price_per_chicken - a.price_per_chicken)
     const sortedLowPricePurchases = purchaseData.slice(0, 60).sort((a, b) => a.price_per_chicken - b.price_per_chicken)
@@ -134,7 +134,7 @@ const Home: React.FC <HomeProps> = props => {
                         </tr>
                         </thead>
                         <tbody>
-                        {sortedTopPricePurchases.slice(0,5).map((purchase) => {
+                        {sortedTopPricePurchases.slice(0,10).map((purchase) => {
 
                             return (
                                 <tr key={purchase.id}>
@@ -162,7 +162,7 @@ const Home: React.FC <HomeProps> = props => {
                         </tr>
                         </thead>
                         <tbody>
-                        {sortedLowPricePurchases.slice(0,5).map((purchase) => {
+                        {sortedLowPricePurchases.slice(0,10).map((purchase) => {
 
                             return (
                                 <tr key={purchase.id}>
