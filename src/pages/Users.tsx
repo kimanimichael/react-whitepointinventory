@@ -44,7 +44,7 @@ const Users: React.FC =  () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const response = await fetch('http://localhost:8080/v1/user',{
+            const response = await fetch('https://michael.alwaysdata.net/whitepoint/user',{
                 method: 'GET',
                 headers: {'Content-Type': 'application/json'},
             })
@@ -57,7 +57,7 @@ const Users: React.FC =  () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const response = await fetch('http://localhost:8080/v1/purchases', {
+            const response = await fetch('https://michael.alwaysdata.net/whitepoint/purchases', {
                 method: 'GET',
                 headers: {'Content-Type': 'application/json'}
             })
@@ -69,7 +69,7 @@ const Users: React.FC =  () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const response = await fetch('http://localhost:8080/v1/payments', {
+            const response = await fetch('https://michael.alwaysdata.net/whitepoint/payments', {
                 method: 'GET',
                 headers: {'Content-Type': 'application/json'}
             })

@@ -41,7 +41,7 @@ const Home: React.FC <HomeProps> = props => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const response = await fetch('http://localhost:8080/v1/farmer', {
+            const response = await fetch('https://michael.alwaysdata.net/whitepoint/farmer', {
                 method: 'GET',
                 headers: {'Content-Type': 'application/json'},
             })
@@ -61,7 +61,7 @@ const Home: React.FC <HomeProps> = props => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const response = await fetch('http://localhost:8080/v1/purchases', {
+            const response = await fetch('https://michael.alwaysdata.net/whitepoint/purchases', {
                 method: 'GET',
                 headers: {'Content-Type': 'application/json'},
             })

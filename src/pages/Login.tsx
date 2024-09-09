@@ -15,7 +15,7 @@ const Login: React.FC <LoginProps> = props => {
     const submit = async (e: SyntheticEvent) => {
         e.preventDefault()
 
-        const response = await fetch('http://localhost:8080/v1/login', {
+        const response = await fetch('https://michael.alwaysdata.net/whitepoint/login', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             credentials: 'include',

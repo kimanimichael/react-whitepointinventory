@@ -19,7 +19,7 @@ const App: React.FC = () => {
     useEffect( () => {
         (
             async () => {
-                const response = await fetch('http://localhost:8080/v1/users', {
+                const response = await fetch('https://michael.alwaysdata.net/whitepoint/users', {
                     method: 'GET',
                     headers: {'Content-Type': 'application/json'},
                     credentials: 'include'

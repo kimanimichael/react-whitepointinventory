@@ -40,7 +40,7 @@ const Payments: React.FC <PaymentProps> = props => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const response = await fetch('http://localhost:8080/v1/payments', {
+            const response = await fetch('https://michael.alwaysdata.net/whitepoint/payments', {
                 method: 'GET',
                 headers: {'Content-Type': 'application/json'},
             })
@@ -54,7 +54,7 @@ const Payments: React.FC <PaymentProps> = props => {
     const submit = async (e: SyntheticEvent) => {
         e.preventDefault()
 
-        const response = await fetch('http://localhost:8080/v1/payments', {
+        const response = await fetch('https://michael.alwaysdata.net/whitepoint/payments', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

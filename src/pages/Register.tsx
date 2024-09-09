@@ -15,7 +15,7 @@ const Register: React.FC <RegisterProps> =props => {
     const submit = async (e: SyntheticEvent) => {
         e.preventDefault()
 
-        const  response = await fetch('http://localhost:8080/v1/users', {
+        const  response = await fetch('https://michael.alwaysdata.net/whitepoint/users', {
             method: 'POST',
             headers: {'Content-Type':'application/json'},
             body: JSON.stringify({
