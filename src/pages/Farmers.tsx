@@ -49,7 +49,7 @@ const Farmers: React.FC = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const response = await fetch('http://localhost:8080/v1/farmer', {
+            const response = await fetch('https://michael.alwaysdata.net/whitepoint/farmer', {
                 method: 'GET',
                 headers: {'Content-Type': 'application/json'},
             })
@@ -62,7 +62,7 @@ const Farmers: React.FC = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const response = await fetch('http://localhost:8080/v1/purchases', {
+            const response = await fetch('https://michael.alwaysdata.net/whitepoint/purchases', {
                 method: 'GET',
                 headers: {'Content-Type': 'application/json'},
             })
@@ -75,7 +75,7 @@ const Farmers: React.FC = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const response = await fetch('http://localhost:8080/v1/payments', {
+            const response = await fetch('https://michael.alwaysdata.net/whitepoint/payments', {
                 method: 'GET',
                 headers: {'Content-Type': 'application/json'},
             })
@@ -93,7 +93,7 @@ const Farmers: React.FC = () => {
     const submit = async (e: SyntheticEvent) => {
         e.preventDefault()
 
-        const response = await fetch('http://localhost:8080/v1/farmers', {
+        const response = await fetch('https://michael.alwaysdata.net/whitepoint/farmers', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({

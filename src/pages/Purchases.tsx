@@ -42,7 +42,7 @@ const Purchases: React.FC <PurchaseProps> = props => {
 
     useEffect(() =>{
         const fetchData = async () => {
-            const response = await fetch('http://localhost:8080/v1/purchases', {
+            const response = await fetch('https://michael.alwaysdata.net/whitepoint/purchases', {
                 method: 'GET',
                 headers: {'Content-Type': 'application/json'}
             })
@@ -59,7 +59,7 @@ const Purchases: React.FC <PurchaseProps> = props => {
     const submit = async (e: SyntheticEvent) => {
         e.preventDefault()
 
-        const response = await fetch('http://localhost:8080/v1/purchases', {
+        const response = await fetch('https://michael.alwaysdata.net/whitepoint/purchases', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

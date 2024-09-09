@@ -8,7 +8,7 @@ interface NavProps {
 
 const Nav: React.FC <NavProps> = props => {
     const logout = async () => {
-        await fetch('http://localhost:8080/v1/logout', {
+        await fetch('https://michael.alwaysdata.net/whitepoint/logout', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             credentials: 'include'
