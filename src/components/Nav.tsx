@@ -1,5 +1,6 @@
 import React from "react";
 import {Link} from "react-router-dom";
+import {BASE_URL} from "../config";
 
 interface NavProps {
     name: string
@@ -8,7 +9,7 @@ interface NavProps {
 
 const Nav: React.FC <NavProps> = props => {
     const logout = async () => {
-        await fetch('https://michael.alwaysdata.net/whitepoint/logout', {
+        await fetch(`'${BASE_URL}/whitepoint/logout`, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             credentials: 'include'

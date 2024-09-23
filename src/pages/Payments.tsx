@@ -1,4 +1,5 @@
 import React, {SyntheticEvent, useEffect, useState} from "react";
+import {BASE_URL} from "../config";
 
 interface PaymentProps {
     APIKey: string
@@ -40,7 +41,7 @@ const Payments: React.FC <PaymentProps> = props => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const response = await fetch('https://michael.alwaysdata.net/whitepoint/payments', {
+            const response = await fetch(`${BASE_URL}/whitepoint/payments`, {
                 method: 'GET',
                 headers: {'Content-Type': 'application/json'},
             })
@@ -54,7 +55,7 @@ const Payments: React.FC <PaymentProps> = props => {
     const submit = async (e: SyntheticEvent) => {
         e.preventDefault()
 
-        const response = await fetch('https://michael.alwaysdata.net/whitepoint/payments', {
+        const response = await fetch(`${BASE_URL}/whitepoint/payments`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
