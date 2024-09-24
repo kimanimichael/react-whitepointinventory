@@ -1,4 +1,5 @@
 import React, {SyntheticEvent, useEffect, useState} from "react";
+import {BASE_URL} from "../config";
 
 interface Farmer {
     cash_balance: number;
@@ -49,7 +50,7 @@ const Farmers: React.FC = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const response = await fetch('https://michael.alwaysdata.net/whitepoint/farmer', {
+            const response = await fetch(`${BASE_URL}/whitepoint/farmer`, {
                 method: 'GET',
                 headers: {'Content-Type': 'application/json'},
             })
@@ -62,7 +63,7 @@ const Farmers: React.FC = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const response = await fetch('https://michael.alwaysdata.net/whitepoint/purchases', {
+            const response = await fetch(`${BASE_URL}/whitepoint/purchases`, {
                 method: 'GET',
                 headers: {'Content-Type': 'application/json'},
             })
@@ -75,7 +76,7 @@ const Farmers: React.FC = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const response = await fetch('https://michael.alwaysdata.net/whitepoint/payments', {
+            const response = await fetch(`${BASE_URL}/whitepoint/payments`, {
                 method: 'GET',
                 headers: {'Content-Type': 'application/json'},
             })
@@ -93,7 +94,7 @@ const Farmers: React.FC = () => {
     const submit = async (e: SyntheticEvent) => {
         e.preventDefault()
 
-        const response = await fetch('https://michael.alwaysdata.net/whitepoint/farmers', {
+        const response = await fetch(`${BASE_URL}/whitepoint/farmers`, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({

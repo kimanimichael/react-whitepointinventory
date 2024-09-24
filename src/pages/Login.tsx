@@ -1,5 +1,6 @@
 import React, {SyntheticEvent, useState} from "react";
 import {Navigate} from "react-router-dom";
+import {BASE_URL} from "../config";
 
 interface LoginProps {
     setName: (name: string) =>void;
@@ -15,7 +16,7 @@ const Login: React.FC <LoginProps> = props => {
     const submit = async (e: SyntheticEvent) => {
         e.preventDefault()
 
-        const response = await fetch('https://michael.alwaysdata.net/whitepoint/login', {
+        const response = await fetch(`${BASE_URL}/whitepoint/login`, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             credentials: 'include',
