@@ -9,7 +9,7 @@ interface NavProps {
 
 const Nav: React.FC <NavProps> = props => {
     const logout = async () => {
-        await fetch(`'${BASE_URL}/whitepoint/logout`, {
+        await fetch(`${BASE_URL}/whitepoint/logout`, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             credentials: 'include'
