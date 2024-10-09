@@ -139,7 +139,7 @@ const Purchases: React.FC <PurchaseProps> = props => {
                                     user_id: item.user_id,
                                     farmer_id: item.farmer_id,
                                     chicken_balance: item.chicken_balance.toFixed(2),
-                                    cash_balance: item.chicken_balance,
+                                    cash_balance: item.cash_balance,
                                 }, null, 2)}</pre>
                         </td>
                     </tr>
