@@ -1,6 +1,7 @@
 import React, {SyntheticEvent, useEffect, useState} from "react";
 import '../styles/Purchases.css'
 import '../App.css'
+import {BASE_URL} from "../config";
 
 interface PurchaseProps {
     APIKey: string
@@ -42,7 +43,7 @@ const Purchases: React.FC <PurchaseProps> = props => {
 
     useEffect(() =>{
         const fetchData = async () => {
-            const response = await fetch('https://michael.alwaysdata.net/whitepoint/purchases', {
+            const response = await fetch(`${BASE_URL}/whitepoint/purchases`, {
                 method: 'GET',
                 headers: {'Content-Type': 'application/json'}
             })
@@ -59,7 +60,7 @@ const Purchases: React.FC <PurchaseProps> = props => {
     const submit = async (e: SyntheticEvent) => {
         e.preventDefault()
 
-        const response = await fetch('https://michael.alwaysdata.net/whitepoint/purchases', {
+        const response = await fetch(`${BASE_URL}/whitepoint/purchases`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
