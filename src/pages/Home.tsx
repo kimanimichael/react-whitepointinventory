@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 import "../styles/Purchases.css"
+import {BASE_URL} from "../config";
 
 interface Farmer {
     cash_balance: number;
@@ -41,7 +42,7 @@ const Home: React.FC <HomeProps> = props => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const response = await fetch('https://michael.alwaysdata.net/whitepoint/farmer', {
+            const response = await fetch(`${BASE_URL}/whitepoint/farmer`, {
                 method: 'GET',
                 headers: {'Content-Type': 'application/json'},
             })
@@ -61,7 +62,7 @@ const Home: React.FC <HomeProps> = props => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const response = await fetch('https://michael.alwaysdata.net/whitepoint/purchases', {
+            const response = await fetch(`${BASE_URL}/whitepoint/purchases`, {
                 method: 'GET',
                 headers: {'Content-Type': 'application/json'},
             })

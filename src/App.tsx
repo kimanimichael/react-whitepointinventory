@@ -11,6 +11,7 @@ import Purchases from "./pages/Purchases";
 import Payments from "./pages/Payments";
 import Users from "./pages/Users";
 import Farmers from "./pages/Farmers";
+import {BASE_URL} from "./config";
 
 const App: React.FC = () => {
     const [name, setName] = useState('')
@@ -19,7 +20,7 @@ const App: React.FC = () => {
     useEffect( () => {
         (
             async () => {
-                const response = await fetch('https://michael.alwaysdata.net/whitepoint/users', {
+                const response = await fetch(`${BASE_URL}/whitepoint/users`, {
                     method: 'GET',
                     headers: {'Content-Type': 'application/json'},
                     credentials: 'include'

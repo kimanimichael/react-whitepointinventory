@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 import "../styles/Purchases.css"
+import {BASE_URL} from "../config";
 
 interface User {
     ApiKey: string;
@@ -44,7 +45,7 @@ const Users: React.FC =  () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const response = await fetch('https://michael.alwaysdata.net/whitepoint/user',{
+            const response = await fetch(`${BASE_URL}/whitepoint/user`,{
                 method: 'GET',
                 headers: {'Content-Type': 'application/json'},
             })
@@ -57,7 +58,7 @@ const Users: React.FC =  () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const response = await fetch('https://michael.alwaysdata.net/whitepoint/purchases', {
+            const response = await fetch(`${BASE_URL}/whitepoint/purchases`, {
                 method: 'GET',
                 headers: {'Content-Type': 'application/json'}
             })
@@ -69,7 +70,7 @@ const Users: React.FC =  () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const response = await fetch('https://michael.alwaysdata.net/whitepoint/payments', {
+            const response = await fetch(`${BASE_URL}/whitepoint/payments`, {
                 method: 'GET',
                 headers: {'Content-Type': 'application/json'}
             })
